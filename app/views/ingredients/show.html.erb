@@ -1,2 +1,17 @@
-<h1>Ingredients#show</h1>
-<p>Find me in app/views/ingredients/show.html.erb</p>
+<h2><%= @ingredient.name %></h2>
+
+<h1>Belongs to:</h1>
+
+<% @ingredient.cocktails.each do |cocktail| %>
+  <p>Rating: <%= cocktail.name %>  (<%= ingredient.cocktail.dose %> dose(s)<p>
+<% end %>
+
+<%#= bootstrap_form_for [@restaurant, @review] do |f| %>
+  <%#= f.text_field :content %>
+  <%#= f.text_field :rating %>
+  <%#= f.submit %>
+<%# end %>
+
+<%= link_to "back",
+  restaurants_path,
+  {class: "btn btn-primary"} %>

@@ -1,2 +1,33 @@
-<h1>Cocktails#show</h1>
-<p>Find me in app/views/cocktails/show.html.erb</p>
+<h1><%= @cocktail.name.capitalize %></h1>
+
+<h2>Ingredients</h2>
+
+<% @cocktail.ingredients.each do |ingredient| %>
+  <p><%= ingredient.name.capitalize %>: <%= @cocktail.doses.where(ingredient: ingredient).first.amount %> doses
+    <%= link_to (image_tag ("delete.png"), {class: "img-circle", id: "logo", height: "15px"}),
+      dose_path(@cocktail.doses.where(ingredient: ingredient).first),
+      method: :delete
+    %>
+  <p>
+<% end %>
+
+<h3>Add ingredient</h3>
+
+<%#= bootstrap_form_for(Dose.new) do |f| %>
+  <%#= f.text_field :ingredient %>
+  <%#= f.text_field :amount %>
+  <%#= f.text_field :cocktail_id, :value => params[:id], :type => "hidden" %>
+  <%#= f.submit "Add ingredient", class: "btn btn-primary" %>
+<%# end %>
+
+<%= simple_form_for(Dose.new, url: doses_path) do |f| %>
+  <%= f.input :amount %>
+  <%= f.input :ingredient_id, collection: @ingredients %>
+  <%= f.hidden_field :cocktail_id, value: params[:id] %>
+  <%= f.submit %>
+<% end %>
+
+
+<%= link_to "back",
+  cocktails_path,
+  {class: "btn btn-primary"} %>
