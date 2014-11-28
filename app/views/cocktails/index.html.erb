@@ -3,6 +3,7 @@
 
 <% @cocktails.each do |cocktail| %>
   <h2><%= cocktail.name.capitalize %></h2>
+  <%= image_tag @cocktail.picture.url(:medium) if @cocktail.picture.exists? %>
 
   <p><% cocktail.ingredients.each_with_index do |ingredient, i| %>
     <% if i==0 %>
@@ -18,5 +19,12 @@
   <%= link_to "Delete?", cocktail_path(cocktail),
       method: :delete,
       data: { confirm: "Are you sure?" } %>
+<% end %>
+
+<h2>Add a cocktail</h2>
+<%= simple_form_for(@cocktail) do |f| %>
+  <%= f.input :name %>
+  <%= f.file_field :picture %>
+  <%= f.submit %>
 
 <% end %>

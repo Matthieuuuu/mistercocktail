@@ -43,6 +43,8 @@ gem 'simple_form'
 gem 'unicorn'
 
 gem 'figaro'
+gem 'aws-sdk'
+gem 'paperclip'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
