@@ -2,16 +2,16 @@
 <p><%= link_to "(go to cocktail list)", cocktails_path, {class: "btn btn-primary"} %></p>
 
 <% @ingredients.each do |ingredient| %>
-  <h2><%= ingredient.name %></h2>
+  <h2><%= ingredient.name.capitalize %></h2>
   <h4>Find it in ...</h4>
 
   <p><% ingredient.cocktails.each_with_index do |cocktail, i| %>
-    <% if i==0 %>
+    <% if i == ingredient.cocktails.length - 1 %>
+      <%= cocktail.name.capitalize %>...
+    <% elsif i == 0 %>
       <%= cocktail.name.capitalize %>,
-    <% elsif i == ingredient.cocktails.length - 1 %>
-      <%= cocktail.name %>...
     <% else %>
-      <%= cocktail.name %>,
+      <%= cocktail.name.capitalize %>,
     <% end %>
   <% end %></p>
 

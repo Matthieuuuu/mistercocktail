@@ -1,5 +1,7 @@
 <h1><%= @cocktail.name.capitalize %></h1>
 
+<%= image_tag @cocktail.picture.url if @cocktail.picture.present? %>
+
 <h2>Ingredients</h2>
 
 <% @cocktail.ingredients.each do |ingredient| %>
