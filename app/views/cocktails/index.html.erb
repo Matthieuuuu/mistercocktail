@@ -22,7 +22,7 @@
 <% end %>
 
 <h2>Add a cocktail</h2>
-<%= simple_form_for(@cocktail, html: { multipart: true }) do |f| %>
+<%= simple_form_for(@cocktail, html: { multipart: true, class: 'form-horizontal' }) do |f| %>
   <%= f.input :name %>
   <%= f.file_field :picture %>
   <%= f.submit %>
