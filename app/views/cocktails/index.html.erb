@@ -1,28 +1,40 @@
-<h1>Crazy cocktails!</h1>
-<p><%= link_to "(go to ingredients)", ingredients_path, {class: "btn btn-primary"} %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6"><h1>Crazy cocktails!</h1></div>
+    <div class="col-xs-6"><%= link_to "(go to ingredients)", ingredients_path, {class: "btn btn-primary"} %></div>
+  </div>
+</div>
 
 <% @cocktails.each do |cocktail| %>
-  <h2><%= cocktail.name.capitalize %></h2>
-  <%= image_tag cocktail.picture.url(:medium) if cocktail.picture.present? %>
+  <div class="container">
+    <div class="row">
+      <h2><%= cocktail.name.capitalize %></h2>
+      <div class="col-xs-6">
+        <%= image_tag cocktail.picture.url(:thumb) if cocktail.picture.present? %>
+      </div>
 
-  <p><% cocktail.ingredients.each_with_index do |ingredient, i| %>
-    <% if i==0 %>
-      <%= ingredient.name.capitalize %>,
-    <% elsif i == cocktail.ingredients.length - 1 %>
-      <%= ingredient.name %>.
-    <% else %>
-      <%= ingredient.name %>,
-    <% end %>
-  <% end %></p>
+      <div class="col-xs-6">
+        <p><% cocktail.ingredients.each_with_index do |ingredient, i| %>
+          <% if i==0 %>
+            <%= ingredient.name.capitalize %>,
+          <% elsif i == cocktail.ingredients.length - 1 %>
+            <%= ingredient.name %>.
+          <% else %>
+            <%= ingredient.name %>,
+          <% end %>
+        <% end %></p>
 
-  <%= link_to "View", cocktail_path(cocktail) %>
-  <%= link_to "Delete?", cocktail_path(cocktail),
-      method: :delete,
-      data: { confirm: "Are you sure?" } %>
+        <%= link_to "View", cocktail_path(cocktail) %>
+        <%= link_to "Delete?", cocktail_path(cocktail),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <h2>Add a cocktail</h2>
-<%= simple_form_for(@cocktail, html: { multipart: true, class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@cocktail, html: { multipart: true, class: 'form-inline' }) do |f| %>
   <%= f.input :name %>
   <%= f.file_field :picture %>
   <%= f.submit %>
